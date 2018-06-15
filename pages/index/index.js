@@ -4,51 +4,43 @@ const app = getApp()
 
 Page({
   data: {
-    motto: '第一个小程序',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
+    imgUrls: [
+      '/images/swiper01.jpg',
+      '/images/swiper02.jpg',
+      '/images/swiper03.jpg'
+    ],
+    indicatorDots: true,
+    autoplay: true,
+    interval: 5000,
+    duration: 1000,
+    proList: [{
+      logo: "/images/pro_01.jpg",
+      title: "精英贷",
+      desc: "22周岁以上即可\n最快3小时下款\n件均8万，最高20万",
+      btnDetail: "/images/btn_detail.png",
+      btnAsk: "/images/btn_ask.png"
+    }, {
+      logo: "/images/pro_02.jpg",
+      title: "月供贷",
+      desc: "不看工作，不看流水\n不限地区，无须家人签字\n最高可做150万",
+      btnDetail: "/images/btn_detail.png",
+      btnAsk: "/images/btn_ask.png"
+      }, {
+        logo: "/images/pro_03.jpg",
+        title: "保单贷",
+        desc: "凭祥版征信和保单官网帐号密码就可进件\n最高可做150万",
+        btnDetail: "/images/btn_detail.png",
+        btnAsk: "/images/btn_ask.png"
       }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+    ]
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+
+  //跳转详情页面
+  toDetail: function(e){
+    console.log(e);
+    wx.navigateTo({
+      url: '/pages/detail/detail'
     })
   }
+ 
 })
